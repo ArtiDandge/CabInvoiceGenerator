@@ -72,6 +72,11 @@ namespace CabInvoiceGeneratorProject
             return Math.Max(totalFare, MINIMUM_FARE);
         }
 
+        /// <summary>
+        /// Method to calculate Fare for multiple rides
+        /// </summary>
+        /// <param name="rides"></param>
+        /// <returns></returns>
         public InvoiceSummary CalculateFare(Ride[] rides)
         {
             double totalFare = 0;
@@ -93,6 +98,13 @@ namespace CabInvoiceGeneratorProject
             return new InvoiceSummary(rides.Length, totalFare);
         }
 
+        /// <summary>
+        /// Method to calculate fare for multiple rides and return totalFare, numberofRides and averageFare
+        /// </summary>
+        /// <param name="rides">rides</param>
+        /// <param name="numOfRides">numOfRides</param>
+        /// <param name="averageFarePerRide">averageFarePerRide</param>
+        /// <returns></returns>
         public InvoiceSummary CalculateFare(Ride[] rides, int numOfRides, double averageFarePerRide)
         {
             double totalFare = 0;
@@ -126,8 +138,7 @@ namespace CabInvoiceGeneratorProject
                 foreach (Ride ride in rides)
                 {
                     totalFare += this.CalculateFare(ride.distance, ride.time);
-                }
-                
+                }                
             }
             catch (CabInvoiceException)
             {
@@ -160,6 +171,11 @@ namespace CabInvoiceGeneratorProject
             }
         }
 
+        /// <summary>
+        /// Method to calculate Fare to specific user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public InvoiceSummary GetInvoiceSummary(string userId)
         {
             try

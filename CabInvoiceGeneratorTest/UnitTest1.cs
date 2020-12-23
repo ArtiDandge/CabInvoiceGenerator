@@ -83,6 +83,7 @@ namespace CabInvoiceGeneratorTest
             invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
             double distance = 3.0;
             int time = 20;
+
             //Calculate Fare
             double fare = invoiceGenerator.CalculateFare(distance, time);
             double expected = 85;
