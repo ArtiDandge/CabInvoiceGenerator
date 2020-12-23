@@ -46,7 +46,7 @@ namespace CabInvoiceGeneratorTest
         /// Test Case to for enhanced Invoice
         /// </summary>
         [Test]
-        public void GivenInvoiceGenerator_WhenUsingInvoiceSummaryClass_ShouldReturnInvoiceSummary()
+        public void GivenInvoiceGenerator_WhenUsingInvoiceSummary_ShouldReturnInvoiceSummaryWithAvgRides()
         {
             //Creating Instance of InviceGenerator For Normal Ride.
             invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
@@ -58,6 +58,22 @@ namespace CabInvoiceGeneratorTest
 
             //Asserting Values
             Assert.AreEqual(expectedSummary, summary);
+        }
+
+        /// <summary>
+        /// Test Case to for Invoice Service
+        /// </summary>
+        [Test]
+        public void GivenUserId_WhenInvoivceService_ShouldReturnInvoice()
+        {
+            RideRepository rideRepository = new RideRepository();
+            Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+            rideRepository.AddRide("1", rides);
+            InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
+            InvoiceSummary expectedInvoice = new InvoiceSummary(2, 30.0, 3);
+
+            //Asserting Values
+            Assert.AreEqual(expectedInvoice, summary);
         }
     }
 }
