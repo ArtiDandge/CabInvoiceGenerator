@@ -33,7 +33,7 @@ namespace CabInvoiceGeneratorProject
         {
             this.numberOfRides = numberOfRides;
             this.totalFare = totalFare;
-            this.userId = userId;
+            //this.userId = userId;
             this.averageFare = this.totalFare / this.numberOfRides;
         }
         /// <summary>
