@@ -93,6 +93,30 @@ namespace CabInvoiceGeneratorProject
             return new InvoiceSummary(rides.Length, totalFare);
         }
 
+        public InvoiceSummary CalculateFare(Ride[] rides, int numOfRides, double averageFarePerRide)
+        {
+            double totalFare = 0;
+            numOfRides = 0;
+            averageFarePerRide = 0;
+            try
+            {
+                //Calculating Total Fare For All Rides
+                foreach (Ride ride in rides)
+                {
+                    totalFare += this.CalculateFare(ride.distance, ride.time);
+                }
+                averageFarePerRide = totalFare / numOfRides;
+            }
+            catch (CabInvoiceException)
+            {
+                if (rides == null)
+                {
+                    throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDES, "Rides Are Null");
+                }
+            }
+            return new InvoiceSummary(rides.Length, totalFare, averageFarePerRide);
+        }
+
         /// <summary>
         /// Method to Add Rides For UserId
         /// </summary>
