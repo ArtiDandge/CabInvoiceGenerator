@@ -9,7 +9,7 @@ namespace CabInvoiceGeneratorProject
         private int numberOfRides;
         private double totalFare;
         private double averageFare;
-
+        private string userId;
         /// <summary>
         /// Parameterized Constructor For Setting Data
         /// </summary>
@@ -29,6 +29,13 @@ namespace CabInvoiceGeneratorProject
             this.averageFare = this.totalFare / this.numberOfRides;
         }
 
+        public InvoiceSummary(int numberOfRides, double totalFare, string useId)
+        {
+            this.numberOfRides = numberOfRides;
+            this.totalFare = totalFare;
+            this.userId = userId;
+            this.averageFare = this.totalFare / this.numberOfRides;
+        }
         /// <summary>
         /// Override Equls Method
         /// </summary>

@@ -66,14 +66,12 @@ namespace CabInvoiceGeneratorTest
         [Test]
         public void GivenUserId_WhenInvoivceService_ShouldReturnInvoice()
         {
-            RideRepository rideRepository = new RideRepository();
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);            
             Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
-            rideRepository.AddRide("1", rides);
-            InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
-            InvoiceSummary expectedInvoice = new InvoiceSummary(2, 30.0, 3);
-
-            //Asserting Values
-            Assert.AreEqual(expectedInvoice, summary);
+            invoiceGenerator.AddRides("1", rides);
+            InvoiceSummary summary = invoiceGenerator.GetInvoiceSummary("1");
+            InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0, "1");
+            Assert.AreEqual(expectedSummary, summary);
         }
     }
 }

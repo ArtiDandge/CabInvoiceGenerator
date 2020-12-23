@@ -117,6 +117,28 @@ namespace CabInvoiceGeneratorProject
             return new InvoiceSummary(rides.Length, totalFare, averageFarePerRide);
         }
 
+        public InvoiceSummary CalculateFare(string userId, Ride[] rides)
+        {
+            double totalFare = 0;
+            try
+            {
+                //Calculating Total Fare For All Rides
+                foreach (Ride ride in rides)
+                {
+                    totalFare += this.CalculateFare(ride.distance, ride.time);
+                }
+                
+            }
+            catch (CabInvoiceException)
+            {
+                if (rides == null)
+                {
+                    throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_USER_ID, "Invalid UserId");
+                }
+            }
+            return new InvoiceSummary(rides.Length, totalFare, userId);
+        }
+
         /// <summary>
         /// Method to Add Rides For UserId
         /// </summary>
