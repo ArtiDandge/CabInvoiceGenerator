@@ -66,11 +66,16 @@ namespace CabInvoiceGeneratorTest
         [Test]
         public void GivenUserId_WhenInvoivceService_ShouldReturnInvoice()
         {
+            //Creating Instance of InviceGenerator For Normal Ride.
             invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);            
             Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
             invoiceGenerator.AddRides("1", rides);
+
+            //Generating Summary
             InvoiceSummary summary = invoiceGenerator.GetInvoiceSummary("1");
             InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0, "1");
+
+            //Asserting Values
             Assert.AreEqual(expectedSummary, summary);
         }
 
@@ -80,6 +85,7 @@ namespace CabInvoiceGeneratorTest
         [Test]
         public void GivenRides_WhenPremiumAndNormal_ShouldSupportBoth()
         {
+            //Creating Instance of InviceGenerator For Normal Ride.
             invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
             double distance = 3.0;
             int time = 20;
